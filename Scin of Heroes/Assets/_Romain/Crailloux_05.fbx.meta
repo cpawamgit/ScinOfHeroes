@@ -1,0 +1,283 @@
+fileFormatVersion: 2
+guid: 81bc0c4571b0f8446b769788e896b497
+timeCreated: 1524393771
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Armature
+    100002: Bra_D
+    100004: Bras_G
+    100006: Camera
+    100008: //RootNode
+    100010: Cube
+    100012: Jambe_D
+    100014: Jambe_G
+    100016: Lamp
+    100018: Lamp.001
+    100020: Main_D
+    100022: Main_D_end
+    100024: Main_G
+    100026: Main_G_end
+    100028: Pelvis
+    100030: Pied_D
+    100032: Pied_D_end
+    100034: Pied_G
+    100036: Pied_G_end
+    100038: Sphere
+    100040: Sphere.001
+    100042: Sphere.002
+    100044: Sphere.003
+    100046: Sphere.004
+    100048: Sphere.005
+    100050: Sphere.006
+    100052: Sphere.007
+    100054: Sphere.008
+    100056: Sphere.009
+    100058: Sphere.010
+    100060: "T\xEAte"
+    400000: Armature
+    400002: Bra_D
+    400004: Bras_G
+    400006: Camera
+    400008: //RootNode
+    400010: Cube
+    400012: Jambe_D
+    400014: Jambe_G
+    400016: Lamp
+    400018: Lamp.001
+    400020: Main_D
+    400022: Main_D_end
+    400024: Main_G
+    400026: Main_G_end
+    400028: Pelvis
+    400030: Pied_D
+    400032: Pied_D_end
+    400034: Pied_G
+    400036: Pied_G_end
+    400038: Sphere
+    400040: Sphere.001
+    400042: Sphere.002
+    400044: Sphere.003
+    400046: Sphere.004
+    400048: Sphere.005
+    400050: Sphere.006
+    400052: Sphere.007
+    400054: Sphere.008
+    400056: Sphere.009
+    400058: Sphere.010
+    400060: "T\xEAte"
+    2000000: Camera
+    2100000: No Name
+    2100002: Material
+    2300000: Cube
+    2300002: Sphere
+    3300000: Cube
+    3300002: Sphere
+    4300000: Sphere.010
+    4300002: Sphere.009
+    4300004: Sphere.008
+    4300006: Sphere.007
+    4300008: Sphere.006
+    4300010: Sphere.005
+    4300012: Sphere.004
+    4300014: Sphere.003
+    4300016: Sphere.002
+    4300018: Sphere.001
+    4300020: Sphere
+    4300022: Cube
+    7400000: Armature|ArmatureAction.001
+    9500000: //RootNode
+    10800000: Lamp
+    10800002: Lamp.001
+    11100000: //RootNode
+    13700000: Sphere.001
+    13700002: Sphere.002
+    13700004: Sphere.003
+    13700006: Sphere.004
+    13700008: Sphere.005
+    13700010: Sphere.006
+    13700012: Sphere.007
+    13700014: Sphere.008
+    13700016: Sphere.009
+    13700018: Sphere.010
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: 839463d9c777f224ab2be9ac7e93e892, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: No Name
+    second: {fileID: 2100000, guid: ff576dff189484b48b049816031b0bd5, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 1
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Armature|ArmatureAction.001
+      takeName: Armature|ArmatureAction.001
+      firstFrame: 0
+      lastFrame: 100
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 0
+      - path: Armature/Pelvis
+        weight: 0
+      - path: Armature/Pelvis/Jambe_D
+        weight: 0
+      - path: Armature/Pelvis/Jambe_D/Pied_D
+        weight: 0
+      - path: Armature/Pelvis/Jambe_D/Pied_D/Pied_D_end
+        weight: 0
+      - path: Armature/Pelvis/Jambe_G
+        weight: 0
+      - path: Armature/Pelvis/Jambe_G/Pied_G
+        weight: 0
+      - path: Armature/Pelvis/Jambe_G/Pied_G/Pied_G_end
+        weight: 0
+      - path: "Armature/Pelvis/T\xEAte"
+        weight: 0
+      - path: "Armature/Pelvis/T\xEAte/Bra_D"
+        weight: 0
+      - path: "Armature/Pelvis/T\xEAte/Bra_D/Main_D"
+        weight: 0
+      - path: "Armature/Pelvis/T\xEAte/Bra_D/Main_D/Main_D_end"
+        weight: 0
+      - path: "Armature/Pelvis/T\xEAte/Bras_G"
+        weight: 0
+      - path: "Armature/Pelvis/T\xEAte/Bras_G/Main_G"
+        weight: 0
+      - path: "Armature/Pelvis/T\xEAte/Bras_G/Main_G/Main_G_end"
+        weight: 0
+      - path: Camera
+        weight: 0
+      - path: Cube
+        weight: 0
+      - path: Lamp
+        weight: 0
+      - path: Lamp.001
+        weight: 0
+      - path: Sphere
+        weight: 1
+      - path: Sphere.001
+        weight: 1
+      - path: Sphere.002
+        weight: 1
+      - path: Sphere.003
+        weight: 1
+      - path: Sphere.004
+        weight: 1
+      - path: Sphere.005
+        weight: 1
+      - path: Sphere.006
+        weight: 1
+      - path: Sphere.007
+        weight: 1
+      - path: Sphere.008
+        weight: 1
+      - path: Sphere.009
+        weight: 1
+      - path: Sphere.010
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 0
+    importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 52
+    normalImportMode: 1
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

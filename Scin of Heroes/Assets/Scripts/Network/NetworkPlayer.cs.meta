@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 07e91a98d7bd20b42828fdbdfc433ba4
+timeCreated: 1525950043
+licenseType: Free
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - hero: {instanceID: 0}
+  - m_PFCPlayerUI: {instanceID: 0}
+  - m_hero: {instanceID: 0}
+  - sceneFader: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
