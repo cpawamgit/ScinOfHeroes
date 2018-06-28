@@ -2,8 +2,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Node : MonoBehaviour
-{
+public class Node : MonoBehaviour {
 
     public Color hoverColor;
     public Vector3 offset;
@@ -30,7 +29,7 @@ public class Node : MonoBehaviour
 
     BuildManager buildManager;
 
-    void Start()
+    void Start ()
     {
         rend = GetComponent<Renderer>();
         startColor = rend.material.color;
@@ -54,8 +53,7 @@ public class Node : MonoBehaviour
 
         PlayerStats.Instance.ChangeMoney(-blueprint.cost);
 
-        _peones = PoolManager.Instance.poolDictionnary[peones.name].GetFromPool(spawnPointForPeones.position);
-        _peones.transform.rotation = spawnPointForPeones.rotation;
+        _peones = MyObjectPooler.Instance.SpawnFromPoolAt(peones, spawnPointForPeones.position, spawnPointForPeones.rotation);
         _peones.GetComponent<Peons>().GoBuildATower(blueprint, GetBuildPosition(), this);
 
         DisableConstruction();
@@ -74,17 +72,21 @@ public class Node : MonoBehaviour
         PlayerStats.Instance.ChangeMoney(-turretBlueprint.upgradeCost);
 
         //Get rid of the old turret
-        PoolManager.Instance.poolDictionnary[turret.name].UnSpawnObject(turret);
+        MyObjectPooler.Instance.ReturnToPool(turret);
 
         //Build a new one
-        GameObject _turret = PoolManager.Instance.poolDictionnary[turretBlueprint.upgradedPrefab.name].GetFromPool(GetBuildPosition());          
+        GameObject _turret = MyObjectPooler.Instance.SpawnFromPool(turretBlueprint.upgradedPrefab);
+        _turret.transform.position = GetBuildPosition();
         _turret.transform.rotation = Quaternion.identity;
+        _turret.SetActive(true);
 
 
         turret = _turret;
 
-        GameObject effect = PoolManager.Instance.poolDictionnary[buildManager.buildEffect.name].GetFromPool(GetBuildPosition());
+        GameObject effect = MyObjectPooler.Instance.SpawnFromPool(buildManager.buildEffect);
+        effect.transform.position = GetBuildPosition();
         effect.transform.rotation = Quaternion.identity;
+        effect.SetActive(true);
 
 
         isUpgraded = true;
@@ -96,10 +98,12 @@ public class Node : MonoBehaviour
     {
         PlayerStats.Instance.ChangeMoney(turretBlueprint.GetSellAmount());
 
-        GameObject _selleffect = PoolManager.Instance.poolDictionnary[buildManager.sellEffect.name].GetFromPool(GetBuildPosition());
+        GameObject _selleffect = MyObjectPooler.Instance.SpawnFromPool(buildManager.sellEffect);
+        _selleffect.transform.position = GetBuildPosition();
         _selleffect.transform.rotation = Quaternion.identity;
+        _selleffect.SetActive(true);
 
-        PoolManager.Instance.poolDictionnary[turret.name].UnSpawnObject(turret);
+        MyObjectPooler.Instance.ReturnToPool(turret);
         turret = null;
         turretBlueprint = null;
     }
@@ -144,7 +148,7 @@ public class Node : MonoBehaviour
             else
                 rend.material.color = notEnoughMoneyColor;
         }
-
+       
     }
 
     void OnMouseExit()
@@ -165,7 +169,7 @@ public class Node : MonoBehaviour
         actualColor = startColor;
         buildingDisable = false;
     }
-
+       
     public void CancelBuilding()
     {
         EnableConstruction();

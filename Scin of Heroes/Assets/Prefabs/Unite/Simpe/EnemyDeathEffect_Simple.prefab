@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 198232752115774918}
   - component: {fileID: 114481457214520674}
   - component: {fileID: 199096004832918662}
-  - component: {fileID: 114488180852612756}
   m_Layer: 0
   m_Name: EnemyDeathEffect_Simple
   m_TagString: Untagged
@@ -55,38 +54,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeBeforeDisable: 5
---- !u!114 &114488180852612756
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1889897949588580}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 182
-    i1: 126
-    i2: 240
-    i3: 139
-    i4: 13
-    i5: 167
-    i6: 14
-    i7: 244
-    i8: 185
-    i9: 1
-    i10: 144
-    i11: 11
-    i12: 168
-    i13: 8
-    i14: 14
-    i15: 41
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
 --- !u!198 &198232752115774918
 ParticleSystem:
   m_ObjectHideFlags: 1

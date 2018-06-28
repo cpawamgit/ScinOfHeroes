@@ -22,16 +22,14 @@ public class Skills : MonoBehaviour
     [SerializeField]
     protected float baseCD;
     private float CD;
-    public float returnCD { get { return CD; } }
 
     [SerializeField]
     protected float skillRange;
 
     public Hero hero;
-    public Sprite UISprite;
 
     protected skill skill;
-    public skill Skill { get { return skill; } }
+
 
     protected List<IDamageable> validTargets;
 
@@ -54,6 +52,7 @@ public class Skills : MonoBehaviour
 
     protected virtual void Update()
     {
+
         if (skill == skill.actif)
         {
             duration -= Time.deltaTime;

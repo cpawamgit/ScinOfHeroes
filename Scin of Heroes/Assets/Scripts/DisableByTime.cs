@@ -19,7 +19,7 @@ public class DisableByTime : MonoBehaviour
         _timeBeforeDisable -= Time.deltaTime;
         if (_timeBeforeDisable <= 0)
         {
-            PoolManager.Instance.poolDictionnary[gameObject.name].UnSpawnObject(gameObject);
+            MyObjectPooler.Instance.ReturnToPool(gameObject);
         }
     }
 

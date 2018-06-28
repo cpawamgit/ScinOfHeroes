@@ -5,14 +5,12 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-public class NewNetworkedPool : MonoBehaviour
+public class NewNetworkedPool : NetworkBehaviour
 {
     public int poolSize = 0;
     public GameObject m_Prefab;
     public List<GameObject> m_Pool = new List<GameObject>();
     public string poolName;
-    public bool willGrow = true;
-
 
     public NetworkHash128 assetId { get; set; }
 
@@ -23,37 +21,38 @@ public class NewNetworkedPool : MonoBehaviour
     {
         assetId = m_Prefab.GetComponent<NetworkIdentity>().assetId;
 
+        ClientScene.RegisterSpawnHandler(assetId, SpawnObject, UnSpawnObject);
+
+        if (isServer)
+            CmdInit();
+    }
+
+
+    [Command]
+    public void CmdInit()
+    {
+       
+       
         for (int i = 0; i < poolSize; ++i)
         {
             GameObject obj = (GameObject)Instantiate(m_Prefab);
             obj.transform.parent = this.transform;
-            obj.name = m_Prefab.name;
             m_Pool.Add(obj);
-            obj.SetActive(false);
+            NetworkServer.Spawn(m_Pool[i]);
+
+
+            m_Pool[i].SetActive(false);
         }
 
-        if (m_Prefab.GetComponent<Unite>() != null)
-        {
-            if (m_Prefab.GetComponent<Unite>().unitData != null)
-            {
-                foreach (GameObject go in m_Prefab.GetComponent<Unite>().unitData.objectToPool)
-                {
-                    if (PoolManager.Instance.poolDictionnary[go.name] != null)
-                    {
-                        Debug.Log("poolDictionary[agent] != null");
-
-                        PoolManager.Instance.poolDictionnary[go.name].poolSize = 23;
-                        PoolManager.Instance.poolDictionnary[go.name].Init();
-                    }
-                }
-            }
-        }
-        ClientScene.RegisterSpawnHandler(assetId, SpawnObject, UnSpawnObject);
+      
     }
 
 
+    //[ClientRpc]
+    //private void TurnOffObject()
+    //{
 
-   
+    //}
 
     public GameObject GetFromPool(Vector3 position)
     {
@@ -61,26 +60,12 @@ public class NewNetworkedPool : MonoBehaviour
         {
             if (!obj.activeInHierarchy)
             {
-                //Debug.Log("Activating GameObject " + obj.name + " at " + position);
+                Debug.Log("Activating GameObject " + obj.name + " at " + position);
                 obj.transform.position = position;
                 obj.SetActive(true);
                 return obj;
             }
         }
-
-        if (willGrow)
-        {
-            //Debug.Log("Adding to the Pool and Activating GameObject " + m_Prefab.name + " at " + position);
-            GameObject obj = (GameObject)Instantiate(m_Prefab);
-            obj.transform.parent = this.transform;
-            m_Pool.Add(obj);
-            obj.name = m_Prefab.name;
-            obj.transform.position = position;
-            obj.SetActive(true);
-            return obj;
-        }
-
-
         Debug.LogError("Could not grab GameObject from pool, nothing available");
         return null;
     }
@@ -92,9 +77,7 @@ public class NewNetworkedPool : MonoBehaviour
 
     public void UnSpawnObject(GameObject spawned)
     {
-        //Debug.Log("Re-pooling GameObject " + spawned.name);
+        Debug.Log("Re-pooling GameObject " + spawned.name);
         spawned.SetActive(false);
     }
-
-    
 }

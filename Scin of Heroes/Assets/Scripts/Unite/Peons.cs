@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -30,9 +31,10 @@ public class Peons : MonoBehaviour, IDamageable
     public GameObject speedEffect;
     public GameObject healEffect;
 
-
-    private Dictionary<string, GameObject> effectDictionnary;
-
+    /// <summary>
+    /// Event that is fired when this instance is removed, such as when pooled or destroyed
+    /// </summary>
+    public event Action<GameObject> removed;
 
     private void OnEnable()
     {
@@ -51,11 +53,6 @@ public class Peons : MonoBehaviour, IDamageable
         navMeshAgent.enabled = false;
         navMeshAgent.enabled = true;
         navMeshAgent.speed = startSpeed;
-
-        effectDictionnary = new Dictionary<string, GameObject>();
-        effectDictionnary.Add("speedEffect", speedEffect);
-        effectDictionnary.Add("healEffect", healEffect);
-
 
         for (int i = 0; i < peons.Count; i++)
         {
@@ -81,19 +78,15 @@ public class Peons : MonoBehaviour, IDamageable
         {
             if (constructedPoints >= blueprint.constructionPoints)
             {
-                PoolManager.Instance.poolDictionnary[buildingTower.name].UnSpawnObject(_buildingTower);
-
-                GameObject turretBuild = PoolManager.Instance.poolDictionnary[blueprint.prefab.name].GetFromPool(buildPosition);
-                turretBuild.transform.rotation = Quaternion.identity;
-
-                GameObject _buildEffect = PoolManager.Instance.poolDictionnary[BuildManager.Instance.buildEffect.name].GetFromPool(buildPosition);
-                _buildEffect.transform.rotation = Quaternion.identity;
+                MyObjectPooler.Instance.ReturnToPool(_buildingTower);
+                GameObject turretBuild = MyObjectPooler.Instance.SpawnFromPoolAt(blueprint.prefab, buildPosition, Quaternion.identity);
+                MyObjectPooler.Instance.SpawnFromPoolAt(BuildManager.Instance.buildEffect, buildPosition, Quaternion.identity);
                 Debug.Log("Tower built");
                 building = false;
                 nodeDestination.turret = turretBuild;
                 nodeDestination.EnableConstruction();
 
-                PoolManager.Instance.poolDictionnary[gameObject.name].UnSpawnObject(gameObject);
+                MyObjectPooler.Instance.ReturnToPool(gameObject);
             }
             else
             {
@@ -107,7 +100,7 @@ public class Peons : MonoBehaviour, IDamageable
             if (navMeshAgent.remainingDistance <= Mathf.Epsilon)
             {
                 PlayerStats.Instance.ChangeMoney(blueprint.cost);
-                PoolManager.Instance.poolDictionnary[gameObject.name].UnSpawnObject(gameObject);
+                MyObjectPooler.Instance.ReturnToPool(gameObject);
             }
         }
     }
@@ -125,8 +118,7 @@ public class Peons : MonoBehaviour, IDamageable
 
     private void BuildATower()
     {
-        _buildingTower = PoolManager.Instance.poolDictionnary[buildingTower.name].GetFromPool(buildPosition);
-        
+        _buildingTower = MyObjectPooler.Instance.SpawnFromPoolAt(buildingTower, buildPosition, Quaternion.identity);
         building = true;
     }
 
@@ -138,15 +130,19 @@ public class Peons : MonoBehaviour, IDamageable
         {
             peonsAlive -= 1;
             peonActualLife = lifePerPeon;
-            
+
 
             if (peonsAlive <= 0)
             {
+                if (removed != null)
+                {
+                    removed(this.gameObject);
+                }
                 if (_buildingTower != null)
-                    PoolManager.Instance.poolDictionnary[gameObject.name].UnSpawnObject(gameObject);
+                    MyObjectPooler.Instance.ReturnToPool(_buildingTower);
 
                 nodeDestination.EnableConstruction();
-                PoolManager.Instance.poolDictionnary[gameObject.name].UnSpawnObject(gameObject);
+                MyObjectPooler.Instance.ReturnToPool(gameObject);
                 return;
             }
 
@@ -160,30 +156,9 @@ public class Peons : MonoBehaviour, IDamageable
         return alignement;
     }
 
-    public void ModifySpeed(float multiplier)
-    {
-        speed = startSpeed * multiplier;
-        navMeshAgent.speed = speed;
-    }
-
     public void Heal(float amount)
     {
         peonActualLife = Mathf.Min(peonActualLife + amount, lifePerPeon);
-    }
-
-
-    public void TurnOnOffEffects(string effect, bool stateToTurn)
-    {
-        if (effectDictionnary[effect] == null)
-        {
-            Debug.Log("No effect with name " + effect);
-            return;
-        }
-
-        if (stateToTurn)
-            effectDictionnary[effect].SetActive(true);
-        else
-            effectDictionnary[effect].SetActive(false);
     }
 
     public void CancelBuilding()
@@ -197,9 +172,39 @@ public class Peons : MonoBehaviour, IDamageable
         onTheWay = false;
     }
 
-    public void ChangeRes(float newRes, string modify)
+    #region IDamageable Methode Useless
+    public void AddBuff(string buffName, float value, BuffType buffType)
     {
-        Debug.Log("Peons dont have Res, at least for now");
+        Debug.Log("Peons dont take Buff, at least for now");
     }
+
+    public void RemoveBuff(string buffName, float value, BuffType buffType)
+    {
+        Debug.Log("Peons dont take Buff, at least for now");
+    }
+
+    public Dictionary<string, List<float>> GetASBoostsDictionary()
+    {
+        return null;
+    }
+
+    public Dictionary<string, List<float>> GetMSBoostsDictionary()
+    {
+        return null;
+    }
+
+    public Dictionary<string, List<float>> GetResiBoostsDictionary()
+    {
+        return null;
+    }
+    public void SetFx(GameObject fxPrefab)
+    {
+        Debug.LogWarning("Methode not supposed to be called");
+    }
+    public void RemoveFx(GameObject fxPrefab)
+    {
+        Debug.LogWarning("Methode not supposed to be called");
+    }
+    #endregion
 
 }

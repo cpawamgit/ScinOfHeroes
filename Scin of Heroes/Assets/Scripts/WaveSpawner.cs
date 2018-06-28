@@ -2,8 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class WaveSpawner : MonoBehaviour
-{
+public class WaveSpawner : MonoBehaviour {
 
 
     public static int EnemiesAlive = 0;
@@ -65,7 +64,7 @@ public class WaveSpawner : MonoBehaviour
 
     void SpawnEnemy(GameObject enemy)
     {
-        GameObject _enemy = PoolManager.Instance.poolDictionnary[enemy.name].GetFromPool(spawnPoint.position);
-        _enemy.transform.rotation = spawnPoint.rotation;
+        MyObjectPooler.Instance.SpawnFromPoolAt(enemy, spawnPoint.position, spawnPoint.rotation);
+        //string enemyString = enemy.name;
     }
 }

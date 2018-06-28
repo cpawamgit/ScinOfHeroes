@@ -10,7 +10,10 @@ public class GarenUltimate : Skills {
 
     public UltimateTargetter ultimateTargetter;
 
-  
+    //private void UpdateTargets()
+    //{
+       
+    //}
 
     protected override void Update()
     {

@@ -451,7 +451,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 110573596}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 373.83}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 0.43752548, z: 1}
   m_Children:
   - {fileID: 1444825422}
@@ -497,6 +497,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 110573596}
+--- !u!114 &246312050 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114115790413206294, guid: 26fc8e77065991743bbe4e4045b50535,
+    type: 2}
+  m_PrefabInternal: {fileID: 775821685}
+  m_Script: {fileID: 11500000, guid: 15a180b29f58d19449f8d6b6f73ead8e, type: 3}
 --- !u!1 &352315023
 GameObject:
   m_ObjectHideFlags: 0
@@ -790,7 +796,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 937092295}
   m_HandleRect: {fileID: 937092294}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -954,7 +960,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3854ca6d25e9532478c22d8f11be6da6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneFader: {fileID: 1987296010}
+  sceneFader: {fileID: 246312050}
 --- !u!114 &565688422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2580,12 +2586,6 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1875181142}
---- !u!114 &1987296010 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114115790413206294, guid: 26fc8e77065991743bbe4e4045b50535,
-    type: 2}
-  m_PrefabInternal: {fileID: 775821685}
-  m_Script: {fileID: 11500000, guid: 15a180b29f58d19449f8d6b6f73ead8e, type: 3}
 --- !u!1 &2127985476
 GameObject:
   m_ObjectHideFlags: 0

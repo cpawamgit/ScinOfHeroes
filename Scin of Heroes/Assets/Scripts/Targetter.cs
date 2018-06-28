@@ -5,7 +5,15 @@ using System;
 
 public class Targetter : MonoBehaviour
 {
-    public event Action<GameObject> targetOutOfRange;
+    /// <summary>
+    /// Fires when a allie enters the target collider
+    /// </summary>
+    public event Action<GameObject> allieExitRange;
+
+    /// <summary>
+    /// Fires when a allie enters the target collider
+    /// </summary>
+    public event Action<GameObject> allieEnterRange;
 
 
     [HideInInspector]
@@ -43,11 +51,6 @@ public class Targetter : MonoBehaviour
         allies = new List<GameObject>();
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
     }
-
-   
-
-
-   
 
     private void OnDisable()
     {
@@ -147,7 +150,13 @@ public class Targetter : MonoBehaviour
         }
 
         if (collider.GetComponent<IDamageable>().GetAlignement() == alignement)
+        {
             allies.Add(collider.gameObject);
+            if (allieEnterRange != null)
+            {
+                allieEnterRange(collider.gameObject);
+            }
+        }
         else
             enemies.Add(collider.gameObject);
     }
@@ -157,20 +166,23 @@ public class Targetter : MonoBehaviour
         if (other.GetComponent<IDamageable>() == null)
             return;
 
-        if (targetOutOfRange != null)
-            targetOutOfRange(other.gameObject);
-       
-
         if (enemies.Contains(other.gameObject))
             enemies.Remove(other.gameObject);
 
         if (allies.Contains(other.gameObject))
+        {
+            if (allieExitRange != null)
+            {
+                allieExitRange(other.gameObject);
+            }
             allies.Remove(other.gameObject);
+        }
+
     }
 
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, range*(scaleForGizmo / 1));
+        Gizmos.DrawWireSphere(transform.position, range * (scaleForGizmo / 1));
     }
 }

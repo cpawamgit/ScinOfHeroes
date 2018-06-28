@@ -19,7 +19,6 @@ public class UnitesMenu : NetworkBehaviour
     private PoolManager poolManager;
     private AgentSelector agentSelector;
 
-
     private void Awake()
     {
         poolManager = PoolManager.Instance;
@@ -27,14 +26,12 @@ public class UnitesMenu : NetworkBehaviour
 
         for (int i = 0; i < AgentSelector.Instance.selectedAgents.Count; i++)
         {
-            agentButtonsImageList[i].sprite = AgentSelector.Instance.selectedAgents[i].GetComponent<Unite>().image;
+            agentButtonsImageList[i].sprite = AgentSelector.Instance.selectedAgents[i].GetComponent<Unite>().icon;
             CDList.Add(AgentSelector.Instance.selectedAgents[i].GetComponent<Unite>().CDBetweenSpawns);
             priceList.Add(AgentSelector.Instance.selectedAgents[i].GetComponent<Unite>().price);
             onCDList.Add(false);
         }
-
     }
-
 
     private void Update()
     {
@@ -62,27 +59,25 @@ public class UnitesMenu : NetworkBehaviour
         }
     }
 
-    Vector3 test;
+    //Vector3 test;
 
     public void SpawnUnite(int indexUniteToSpawn)
     {
-
-        foreach (NetworkPlayer player in NetworkManager.Instance.connectedPlayers)
-        {
-            if (player.hasAuthority)
-            {
-                player.CmdSpawnFromPool(indexUniteToSpawn, test);
-                GameObject unit = player.go;
-            }
-        }
+        //foreach (NetworkPlayer player in NetworkManager.Instance.connectedPlayers)
+        //{
+        //    if (player.hasAuthority)
+        //    {
+        //        player.CmdSpawnFromPool(indexUniteToSpawn, test);
+        //        GameObject unit = player.go;
+        //    }
+        //}
+        MyObjectPooler.Instance.SpawnFromPoolAt(agentSelector.selectedAgents[indexUniteToSpawn], spawnPoint, Quaternion.identity);
 
         onCDList[indexUniteToSpawn] = true;
         agentButtonsList[indexUniteToSpawn].interactable = false;
 
         PlayerStats.Instance.ChangeMoney(-priceList[indexUniteToSpawn]);
     }
-
-  
 
     public void CheckMoney()
     {
@@ -104,5 +99,4 @@ public class UnitesMenu : NetworkBehaviour
             i++;
         }
     }
-
 }

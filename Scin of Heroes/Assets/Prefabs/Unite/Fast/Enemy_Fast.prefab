@@ -582,28 +582,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1c2660f63aeae54383c69ab135536f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRate: 1
+  m_FireRate: 1
   bulletPrefab: {fileID: 1267483021203456, guid: b851f6fc584cefa449a0301acb85a3ab,
     type: 2}
   value: 25
   CDBetweenSpawns: 0.1
   price: 15
-  baseResistance: 0
+  m_MovementSpeed: 10
+  m_Resistance: 0
   range: 15
   melee: 0
   AAdamage: 0
-  startSpeed: 20
   startHealth: 30
   normalizedHealth: 0.5
-  image: {fileID: 21300000, guid: 59ac7254d6228744e9a8d9124f1235f1, type: 3}
-  speedEffect: {fileID: 1481072203941946}
-  healEffect: {fileID: 1656203745291164}
-  resEffect: {fileID: 0}
+  targetter: {fileID: 114739689192056382}
+  icon: {fileID: 21300000, guid: 59ac7254d6228744e9a8d9124f1235f1, type: 3}
+  appliedEffectOffset: {x: 0, y: 0, z: 0}
+  appliedEffectScale: 1
   deathEffect: {fileID: 1889897949588580, guid: e50e6a08e2b7fe34f90d8b538f53a3a3,
     type: 2}
-  targetter: {fileID: 114739689192056382}
-  speed: 10
-  anim: {fileID: 0}
 --- !u!114 &114665901113741128
 MonoBehaviour:
   m_ObjectHideFlags: 1

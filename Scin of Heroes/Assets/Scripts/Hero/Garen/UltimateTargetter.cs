@@ -6,6 +6,7 @@ public class UltimateTargetter : MonoBehaviour {
 
     [HideInInspector]
     public List<GameObject> enemies;
+    private List<IDamageable> enemiesToDamage;
     public Alignement alignement;
 
     private void OnEnable()

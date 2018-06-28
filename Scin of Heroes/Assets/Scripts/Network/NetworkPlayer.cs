@@ -213,7 +213,12 @@ public class NetworkPlayer : NetworkBehaviour
             Debug.Log("poolDictionary[agent] != null");
 
             poolDictionary[agent].poolSize = 23;
+
+            //if (!poolDictionary[agent].initialised)
+            //    poolDictionary[agent].Init();
+
             poolDictionary[agent].Init();
+
         }
     }
 

@@ -665,19 +665,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7347e71b5e5ee6544b17d12e899c8767, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startHealth: 250
+  startHealth: 25000
   normalizedHealth: 0
   towerDeathEffect: {fileID: 1889897949588580, guid: 6a6902dc07357d746b7a76ceeea6e25a,
     type: 2}
   targetter: {fileID: 114348767040003380}
-  healer: 0
+  appliedEffectOffset: {x: 0, y: 0, z: 0}
+  appliedEffectScale: 1
+  healer: 1
   healAmount: 8
   healRate: 1
-  boostMS: 0
-  speedModifier: 1.5
-  boostRes: 1
-  newRes: 0.5
-  resEffect: {fileID: 1297276978674842, guid: 6b41f6a4698d06642a03b82f58f040e1, type: 2}
+  healFxPrefab: {fileID: 1513654034078686, guid: 1da1349a68eaee74aad2a906656fcc42,
+    type: 2}
+  isAttackSpeedBooster: 1
+  aSModifier: 2
+  attackSpeedFxPrefab: {fileID: 1193402266718744, guid: 15b9f3da059a53340865a06bdd76f50d,
+    type: 2}
+  isMouvmentSpeedBooster: 1
+  mSModifier: 2
+  movementSpeedFxPrefab: {fileID: 1865339459100900, guid: 5f88ae5d6dd95994c9cc8e77f8c20220,
+    type: 2}
+  isResistanceBooster: 1
+  resModifier: 0.5
+  resistanceFxPrefab: {fileID: 1297276978674842, guid: 14009fd849e610144ae8c88f08b71f30,
+    type: 2}
+  enterParticleSystem: {fileID: 0}
+  enterAudioSource: {fileID: 0}
 --- !u!135 &135835121685561266
 SphereCollider:
   m_ObjectHideFlags: 1

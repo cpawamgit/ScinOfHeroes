@@ -18,7 +18,7 @@ public class Bullet : MonoBehaviour {
 	void Update () {
 		if (target == null)
         {
-            PoolManager.Instance.poolDictionnary[gameObject.name].UnSpawnObject(gameObject);
+            MyObjectPooler.Instance.ReturnToPool(gameObject);
             return;
         }
 
@@ -37,8 +37,10 @@ public class Bullet : MonoBehaviour {
 
     void HitTarget()
     {
-        GameObject impactEffectInst = PoolManager.Instance.poolDictionnary[impactEffect.name].GetFromPool(transform.position); 
+        GameObject impactEffectInst = MyObjectPooler.Instance.SpawnFromPool(impactEffect);
+        impactEffectInst.transform.position = transform.position;
         impactEffectInst.transform.rotation = transform.rotation;
+        impactEffectInst.SetActive(true);
 
         if (explosionRadius > 0f)
         {
@@ -48,7 +50,8 @@ public class Bullet : MonoBehaviour {
             Damage(target);
         }
 
-        PoolManager.Instance.poolDictionnary[gameObject.name].UnSpawnObject(gameObject);
+        MyObjectPooler.Instance.ReturnToPool(gameObject);
+
     }
 
     void Explode()

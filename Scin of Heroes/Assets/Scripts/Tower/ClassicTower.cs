@@ -37,8 +37,10 @@ public class ClassicTower : Towers, IDamageable
 
     void Shoot ()
     {
-        GameObject bulletGO = PoolManager.Instance.poolDictionnary[bulletPrefab.name].GetFromPool(targetter.firePoint.position);  
+        GameObject bulletGO = MyObjectPooler.Instance.SpawnFromPool(bulletPrefab);
+        bulletGO.transform.position = targetter.firePoint.position;
         bulletGO.transform.rotation = targetter.firePoint.rotation;
+        bulletGO.SetActive(true);
 
         Bullet bullet = bulletGO.GetComponent<Bullet>();
 

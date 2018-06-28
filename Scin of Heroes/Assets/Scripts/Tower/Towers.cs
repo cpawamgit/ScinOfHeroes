@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,8 +7,8 @@ public class Towers : MonoBehaviour, IDamageable
 {
     [Header("Stats")]
     public float startHealth = 100f;
-    protected float health;
-    protected bool isDead;
+    private float health;
+    private bool isDead;
 
     [HideInInspector]
     public float normalizedHealth;
@@ -23,6 +24,10 @@ public class Towers : MonoBehaviour, IDamageable
     [Header("Setup")]
     public Targetter targetter;
 
+    /// <summary>
+    /// Event that is fired when this instance is removed, such as when pooled or destroyed
+    /// </summary>
+    public event Action<GameObject> removed;
 
 
     protected virtual void OnEnable()
@@ -32,11 +37,6 @@ public class Towers : MonoBehaviour, IDamageable
         towerHealthBar = GetComponentInChildren<EnemyHealthBar>();
         normalizedHealth = health / startHealth;
         towerHealthBar.UpdateEnnemyHealth(normalizedHealth);
-
-        //effectDictionnary = new Dictionary<string, GameObject>();
-        //effectDictionnary.Add("speedEffect", speedEffect);
-        //effectDictionnary.Add("healEffect", healEffect);
-
     }
 
     protected virtual void OnDisable()
@@ -73,28 +73,13 @@ public class Towers : MonoBehaviour, IDamageable
         towerHealthBar.UpdateEnnemyHealth(normalizedHealth);
     }
 
-    public void TurnOnOffEffects(string effect, bool stateToTurn)
+    /// <summary>
+    /// Return the Effect's Fx List that runs on this units
+    /// </summary>
+    public List<GameObject> GetEffectFxList()
     {
-        Debug.Log("Towers dont have speed, you dumbass !!!");
-        return;
-
-        //if (effectDictionnary[effect] == null)
-        //{
-        //    Debug.Log("No effect with name " + effect);
-        //    return;
-        //}
-
-        //if (stateToTurn)
-        //    effectDictionnary[effect].SetActive(true);
-        //else
-        //    effectDictionnary[effect].SetActive(false);
-
-    }
-
-    public void ModifySpeed(float pct)
-    {
-        Debug.Log("Towers dont have speed, you dumbass !!!");
-        return;
+        Debug.LogWarning("Towers dont have EffectFxList, you dumbass !!!");
+        return null;
     }
 
 
@@ -102,16 +87,57 @@ public class Towers : MonoBehaviour, IDamageable
     {
         isDead = true;
 
-        GameObject towerDeathEffectInst = PoolManager.Instance.poolDictionnary[towerDeathEffect.name].GetFromPool(transform.position); 
+        if (removed != null)
+        {
+            removed(this.gameObject);
+        }
+
+        GameObject towerDeathEffectInst = MyObjectPooler.Instance.SpawnFromPool(towerDeathEffect);
+        towerDeathEffectInst.transform.position = transform.position;
         towerDeathEffectInst.transform.rotation = transform.rotation;
+        towerDeathEffectInst.SetActive(true);
 
-        PoolManager.Instance.poolDictionnary[gameObject.name].UnSpawnObject(gameObject);
+        MyObjectPooler.Instance.ReturnToPool(gameObject);
     }
 
 
-    public void ChangeRes(float newRes, string modify)
+    #region IDamageable Methode Useless
+    public void AddBuff(string buffName, float value, BuffType buffType)
     {
-        Debug.Log("Tower dont have Res, at least for now");
+        Debug.LogWarning("Towers dont get Buffs, you dumbass !!!");
     }
-   
+
+    public void RemoveBuff(string buffName, float value, BuffType buffType)
+    {
+        Debug.LogWarning("Towers dont get Buffs, you dumbass !!!");
+    }
+
+    public Dictionary<string, List<float>> GetASBoostsDictionary()
+    {
+        Debug.LogWarning("Methode not supposed to be called on a tower");
+        return null;
+    }
+
+    public Dictionary<string, List<float>> GetMSBoostsDictionary()
+    {
+        Debug.LogWarning("Methode not supposed to be called on a tower");
+        return null;
+    }
+
+    public Dictionary<string, List<float>> GetResiBoostsDictionary()
+    {
+        Debug.LogWarning("Methode not supposed to be called on a tower");
+        return null;
+    }
+    public void SetFx(GameObject fxPrefab)
+    {
+        Debug.LogWarning("Methode not supposed to be called on a tower");
+
+    }
+    public void RemoveFx(GameObject fxPrefab)
+    {
+        Debug.LogWarning("Methode not supposed to be called on a tower");
+    }
+    #endregion
+
 }

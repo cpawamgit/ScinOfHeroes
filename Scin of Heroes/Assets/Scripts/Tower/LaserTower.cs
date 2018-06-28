@@ -17,8 +17,6 @@ public class LaserTower : MonoBehaviour {
     [Header("Setup")]
     public Targetter targetter;
 
-
-
     private void Update()
     {
         if (targetter.target == null)
@@ -32,20 +30,14 @@ public class LaserTower : MonoBehaviour {
             return;
 
         }
-
         targetter.LockOnTarget();
-
-      
         Laser();
-    
-
      }
-
 
     void Laser()
     {
         targetter.targetEnemy.TakeDamage(damageOverTime * Time.deltaTime);
-        targetter.targetEnemy.ModifySpeed(slowAmount);
+        targetter.targetEnemy.AddBuff("LaserSlow",slowAmount,BuffType.MSBoost);
 
         if (!lineRenderer.enabled)
         {
@@ -63,7 +55,4 @@ public class LaserTower : MonoBehaviour {
 
         impactEffect.transform.rotation = Quaternion.LookRotation(dir);
     }
-
-  
-
 }
